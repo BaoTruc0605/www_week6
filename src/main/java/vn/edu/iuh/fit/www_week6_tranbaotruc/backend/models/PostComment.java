@@ -39,4 +39,18 @@ public class PostComment {
     @ToString.Exclude
     private Set<PostComment> postComments;
 
+    @Override
+    public String toString() {
+        return "PostComment{" +
+                "id=" + id +
+                ", post=" + post +
+                ", user=" + user +
+                ", title='" + title + '\'' +
+                ", published=" + published +
+                ", content='" + content + '\'' +
+                ", publishedAt=" + publishedAt +
+                ", createdAt=" + createdAt +
+                ", parent=" + parent +
+                '}';
+    }
 }

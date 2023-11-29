@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Jobs</title>
+</head>
+<body>
+<div class="container">
+    <form action="/addPost" method="post">
+        <input type="hidden" name="userId" th:value="${user.id}" >
+        <label>Đang tải một post mới</label><br></br>
+        <label>Meta title: </label>
+        <input type="text" name="metaTitle"><br>
+        <label>title: </label>
+        <input type="text" name="title"><br>
+        <label>Content: </label>
+        <input type="text" name="content"><br>
+        <label>Summary: </label>
+        <input type="text" name="summary"><br>
+
+        <label>Select parent post: </label>-->
+        <select name="parent">
+            <option value="">Select parent</option>
+            <option th:each="p : ${posts}" th:value="${p.getId()}" th:text="${p.getTitle()}"></option>
+        </select>
+
+        <button type="submit">Thêm</button>
+    </form>
+</div>
+</body>
+</html>

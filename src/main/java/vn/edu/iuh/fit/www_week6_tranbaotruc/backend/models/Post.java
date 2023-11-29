@@ -38,7 +38,8 @@ public class Post {
     @JoinColumn(name = "author_id", nullable = false)
     private User author;
     @ManyToOne
-    @JoinColumn(name = "parent_id", nullable = false)
+    @JoinColumn(name = "parent_id")
+    @NonNull
     private Post parent;
     @OneToMany(mappedBy = "parent")
     @ToString.Exclude
@@ -46,6 +47,19 @@ public class Post {
     @OneToMany(mappedBy = "post")
     @ToString.Exclude
     private Set<PostComment> postComments = new LinkedHashSet<>();
+
+    public Post(String title, Boolean published, String content, String metaTitle, String summary, Instant createdAt, Instant publishedAt, Instant updatedAt, User author, Post parent) {
+        this.title = title;
+        this.published = published;
+        this.content = content;
+        this.metaTitle = metaTitle;
+        this.summary = summary;
+        this.createdAt = createdAt;
+        this.publishedAt = publishedAt;
+        this.updatedAt = updatedAt;
+        this.author = author;
+        this.parent = parent;
+    }
 
     @Override
     public String toString() {

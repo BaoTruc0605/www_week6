@@ -9,7 +9,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "user")
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
@@ -33,9 +32,11 @@ public class User {
     private String profile;
     @Column(name = "password_hash",length = 64, nullable = false)
     private String passwordHash;
-    @Column(name = "registerd_at",nullable = false)
+    @Column(name = "registerd_at")
+    @NonNull
     private Instant registeredAt;
-    @Column(name = "last_login",nullable = false)
+    @Column(name = "last_login")
+    @NonNull
     private Instant lastLogin;
     @OneToMany(mappedBy = "author")
     @ToString.Exclude
@@ -43,4 +44,32 @@ public class User {
     @OneToMany(mappedBy = "user")
     @ToString.Exclude
     private Set<PostComment> comments = new LinkedHashSet<>();
+
+    public User(String firstName, String middleName, String lastName, String email, String mobile, String intro, String profile, String passwordHash) {
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.email = email;
+        this.mobile = mobile;
+        this.intro = intro;
+        this.profile = profile;
+        this.passwordHash = passwordHash;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", intro='" + intro + '\'' +
+                ", profile='" + profile + '\'' +
+                ", passwordHash='" + passwordHash + '\'' +
+                ", registeredAt=" + registeredAt +
+                ", lastLogin=" + lastLogin +
+                '}';
+    }
 }

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${post.metaTitle}"></title>
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-
+T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous">
+    <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-
+C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div th:switch="${post}">
+    <h2 th:case="null">No posts yet!</h2>
+    <div th:case="*">
+        <h4 th:text="${post.title}" class="text-center"></h4><br><br>
+        <p th:text="${post.content}"></p>
+        <br>
+        <h5 style="text-align: right;">Author: <span th:text="${post.author.getFirstName()}" ></span>
+            <span th:text=" ${post.author.getMiddleName()}"></span><span th:text=" ${post.author.getLastName()}"></span></h5>
+                <div th:switch="${post.parent}">
+                    <div th:case="null">
+                        <p>No parent</p>
+                    </div>
+                    <div th:case="*">
+                        <p>Parent:
+                        <span th:text="${post.parent.getTitle()}"></span></p>
+
+                    </div>
+                </div>
+        <p>Publish at: <span th:text="${post.parent.getPublishedAt()}"></span></p>
+        <p>Summary: <span th:text="${post.summary}"></span></p>
+    </div>
+</div>
+</body>
+</html>

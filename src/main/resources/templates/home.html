@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+
+<div>
+    <div >
+        <h2>Xin chào: <span th:text="${loginAccount.get().getFirstName()}"></span>
+            <span th:text=" ${loginAccount.get().getMiddleName()}"></span>
+            <span th:text=" ${loginAccount.get().getLastName()}"></span></h2>
+        Post 1 bài mới: <a th:href="@{/insertPost(id=${loginAccount.get().getId()})}">Post a new content</a>
+        Danh sách bài post: <a th:href="@{/myPost(id=${loginAccount.get().getId()})}">Post a new content</a>
+    </div>
+</div>
+</body>
+</html>
