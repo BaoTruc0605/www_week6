@@ -8,11 +8,12 @@
 
 <div>
     <div >
-        <h2>Xin chào: <span th:text="${loginAccount.get().getFirstName()}"></span>
-            <span th:text=" ${loginAccount.get().getMiddleName()}"></span>
-            <span th:text=" ${loginAccount.get().getLastName()}"></span></h2>
-        Post 1 bài mới: <a th:href="@{/insertPost(id=${loginAccount.get().getId()})}">Post a new content</a>
-        Danh sách bài post: <a th:href="@{/myPost(id=${loginAccount.get().getId()})}">Post a new content</a>
+        <h2>Xin chào: <span th:text="${loginAccount.get().getFirstName()}"></span><br>
+            <span th:text=" ${loginAccount.get().getMiddleName()}"></span><br>
+            <span th:text=" ${loginAccount.get().getLastName()}"></span></h2><br>
+        Post 1 bài mới: <a th:href="@{/insertPost(id=${loginAccount.get().getId()})}">Post a new content</a><br>
+        Danh sách bài post: <a th:href="@{/myPost(id=${loginAccount.get().getId()})}">Post a new content</a><br>
+        Bản tin: <a th:href="@{/banTin(userId=${loginAccount.get().getId()})}">Bản tin</a><br>
     </div>
 </div>
 </body>

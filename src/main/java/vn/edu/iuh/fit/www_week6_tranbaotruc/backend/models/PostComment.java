@@ -39,6 +39,17 @@ public class PostComment {
     @ToString.Exclude
     private Set<PostComment> postComments;
 
+    public PostComment(Post post, User user, String title, Boolean published, String content, Instant publishedAt, Instant createdAt, PostComment parent) {
+        this.post = post;
+        this.user = user;
+        this.title = title;
+        this.published = published;
+        this.content = content;
+        this.publishedAt = publishedAt;
+        this.createdAt = createdAt;
+        this.parent = parent;
+    }
+
     @Override
     public String toString() {
         return "PostComment{" +

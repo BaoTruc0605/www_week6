@@ -15,6 +15,37 @@ T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
 C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        .post-container {
+            border-radius: 10px;
+            margin-bottom: 15px;
+            padding: 15px;
+
+        }
+
+
+        .post-container:nth-child(odd) {
+            background-color: #d6a3dc;
+        }
+
+        .post-container:nth-child(even) {
+            background-color: #a5dee5;
+        }
+        button[type="submit"] {
+            background-color: #efb0c9;
+            color: #000;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+
+        button[type="submit"]:hover {
+            background-color:#efb0c9;
+        }
+    </style>
 </head>
 <body>
 <div th:switch="${post}">
@@ -23,20 +54,42 @@ C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         <h4 th:text="${post.title}" class="text-center"></h4><br><br>
         <p th:text="${post.content}"></p>
         <br>
-        <h5 style="text-align: right;">Author: <span th:text="${post.author.getFirstName()}" ></span>
-            <span th:text=" ${post.author.getMiddleName()}"></span><span th:text=" ${post.author.getLastName()}"></span></h5>
-                <div th:switch="${post.parent}">
-                    <div th:case="null">
-                        <p>No parent</p>
-                    </div>
-                    <div th:case="*">
-                        <p>Parent:
-                        <span th:text="${post.parent.getTitle()}"></span></p>
-
-                    </div>
-                </div>
-        <p>Publish at: <span th:text="${post.parent.getPublishedAt()}"></span></p>
+        <h5 style="text-align: right;">Author: <span th:text="${post.author.getFirstName()}"></span>
+            <span th:text=" ${post.author.getMiddleName()}"></span><span th:text=" ${post.author.getLastName()}"></span>
+        </h5>
+        <div th:switch="${post.parent}">
+            <div th:case="null">
+                <p>No parent</p>
+            </div>
+            <div th:case="*">
+                <p>Parent:
+                    <span th:text="${post.parent.getTitle()}"></span></p>
+            </div>
+        </div>
+        <p>Publish at: <span th:text="${post.getPublishedAt()}"></span></p>
         <p>Summary: <span th:text="${post.summary}"></span></p>
+
+        <h4>Comment: </h4><br>
+        <form action="/addComment" method="post">
+            <input type="hidden" name="userId" th:value="${userId}">
+            <h2 th:text="${userId}"></h2>
+            <input type="text" placeholder="Comment của bạn" name="metaTitle">
+            <button type="submit" >Comment</button>
+        </form>
+
+        <div th:switch="${postComments}">
+            <h2 th:case="null">No postComments yet!</h2>
+            <div th:case="*">
+                <div th:each="postComment : ${postComments}" class="post-container">
+                    <p th:text="${postComment.title}"></p><br>
+                    <p th:text="${postComment.content}"></p>
+                    <p style="text-align: right;"><span th:text="${postComment.user.getFirstName()}"></span><span th:text="${postComment.user.getMiddleName()}"></span>
+                        <span th:text="${postComment.user.getLastName()}"></span></p>
+
+                </div>
+
+            </div>
+        </div>
     </div>
 </div>
 </body>
