@@ -41,10 +41,10 @@ public class Post {
     @JoinColumn(name = "parent_id")
     @NonNull
     private Post parent;
-    @OneToMany(mappedBy = "parent")
+    @OneToMany(mappedBy = "parent", fetch = FetchType.EAGER)
     @ToString.Exclude
     private Set<Post> posts = new LinkedHashSet<>();
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "post",fetch = FetchType.EAGER)
     @ToString.Exclude
     private Set<PostComment> postComments = new LinkedHashSet<>();
 

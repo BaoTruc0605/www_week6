@@ -8,4 +8,8 @@ import java.util.List;
 
 public interface PostCommentRepository extends JpaRepository<PostComment,Long> {
     List<PostComment> findPostCommentsByPost(Post post);
+
+    List<PostComment> findPostCommentsByParent(PostComment postComment);
+    List<PostComment> findPostCommentsByPostAndParent(Post post, PostComment parent);
+
 }

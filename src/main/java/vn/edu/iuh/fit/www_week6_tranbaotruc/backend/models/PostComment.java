@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.Instant;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
@@ -35,9 +36,9 @@ public class PostComment {
     @ManyToOne
     @JoinColumn(name = "parent_id")
     private PostComment parent;
-    @OneToMany(mappedBy = "parent")
+    @OneToMany(mappedBy = "parent", fetch = FetchType.EAGER)
     @ToString.Exclude
-    private Set<PostComment> postComments;
+    private Set<PostComment> postComments  = new LinkedHashSet<>();
 
     public PostComment(Post post, User user, String title, Boolean published, String content, Instant publishedAt, Instant createdAt, PostComment parent) {
         this.post = post;
@@ -49,6 +50,7 @@ public class PostComment {
         this.createdAt = createdAt;
         this.parent = parent;
     }
+
 
     @Override
     public String toString() {
@@ -64,4 +66,19 @@ public class PostComment {
                 ", parent=" + parent +
                 '}';
     }
+    public Set<PostComment> getAllDescendants() {
+        Set<PostComment> allDescendants = new LinkedHashSet<>();
+        collectDescendants(this, allDescendants);
+        return allDescendants;
+    }
+
+    private void collectDescendants(PostComment currentComment, Set<PostComment> allDescendants) {
+        for (PostComment child : currentComment.getPostComments()) {
+            allDescendants.add(child);
+            // Đệ quy để lấy tất cả con của con
+            collectDescendants(child, allDescendants);
+        }
+    }
+
+
 }

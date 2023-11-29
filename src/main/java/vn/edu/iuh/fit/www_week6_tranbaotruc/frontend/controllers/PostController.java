@@ -56,7 +56,7 @@ public class PostController {
 
         redirectAttributes.addAttribute("id", userId);
 //
-        return "redirect:/viewMyPost";
+        return "redirect:/myPost";
 
     }
 

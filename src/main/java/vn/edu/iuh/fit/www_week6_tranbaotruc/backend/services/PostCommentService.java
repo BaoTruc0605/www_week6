@@ -23,8 +23,16 @@ public class PostCommentService {
     }
 
 
+//    public List<PostComment> findPostCommentsByPost(Post post) {
+//        return postCommentRepository.findPostCommentsByPost(post);
+//    }
+
     public List<PostComment> findPostCommentsByPost(Post post) {
-        return postCommentRepository.findPostCommentsByPost(post);
+        return postCommentRepository.findPostCommentsByPostAndParent(post,null);
+    }
+
+    public Optional<PostComment> findById(long id) {
+        return postCommentRepository.findById(id);
     }
 
 //    public List<Post> findAllByAuthorAndPublished(User author, boolean published) {

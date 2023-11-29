@@ -38,10 +38,10 @@ public class User {
     @Column(name = "last_login")
     @NonNull
     private Instant lastLogin;
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "author" , fetch = FetchType.EAGER)
     @ToString.Exclude
     private Set<Post> posts = new LinkedHashSet<>();
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user" , fetch = FetchType.EAGER)
     @ToString.Exclude
     private Set<PostComment> comments = new LinkedHashSet<>();
 

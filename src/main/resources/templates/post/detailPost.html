@@ -21,7 +21,19 @@ C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             border-radius: 10px;
             margin-bottom: 15px;
             padding: 15px;
+        }
 
+        .post-container2 {
+            border-radius: 10px;
+            margin-bottom: 15px;
+            padding: 15px;
+        }
+
+
+        .post-container h4, .post-container p, .post-container h5, .post-container div {
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
         }
 
 
@@ -32,10 +44,18 @@ C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         .post-container:nth-child(even) {
             background-color: #a5dee5;
         }
+
+        .post-container2:nth-child(odd) {
+            background-color: lightgreen;
+        }
+
+        .post-container2:nth-child(even) {
+            background-color: salmon;
+        }
+
         button[type="submit"] {
-            background-color: #efb0c9;
+            background-color: #a1c9f1;
             color: #000;
-            padding: 10px 15px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -43,9 +63,44 @@ C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 
 
         button[type="submit"]:hover {
-            background-color:#efb0c9;
+            background-color: #efb0c9;
         }
+
+        .reply-form {
+            display: none;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .reply-cmt {
+            display: none;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /*.scroll-view {*/
+        /*    width: 90%;*/
+        /*    height: 300px;*/
+        /*    overflow: auto;*/
+        /*    border: 1px solid #ccc;*/
+        /*}*/
+
     </style>
+    <script>
+        function toggleReplyForm(postCommentId) {
+            var replyForm = document.getElementById("replyForm" + postCommentId);
+            replyForm.style.display = (replyForm.style.display === "none") ? "block" : "none";
+        }
+
+        function xemReplyCmt(postCommentId) {
+            var replyCmt = document.getElementById("replyCmt" + postCommentId);
+            replyCmt.style.display = (replyCmt.style.display === "none") ? "block" : "none";
+        }
+    </script>
 </head>
 <body>
 <div th:switch="${post}">
@@ -70,21 +125,69 @@ C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         <p>Summary: <span th:text="${post.summary}"></span></p>
 
         <h4>Comment: </h4><br>
-        <form action="/addComment" method="post">
+        <form action="/addPostComment" method="post">
+            <input type="hidden" name="postId" th:value="${post.id}">
             <input type="hidden" name="userId" th:value="${userId}">
-            <h2 th:text="${userId}"></h2>
-            <input type="text" placeholder="Comment của bạn" name="metaTitle">
-            <button type="submit" >Comment</button>
+            <input style="width: 70%;" type="text" placeholder="Title" name="yourTitle"><br>
+            <textarea style="width: 70%;" type="text" placeholder="Comment của bạn" name="yourComment"></textarea>
+            <button type="submit">Comment</button>
         </form>
 
         <div th:switch="${postComments}">
-            <h2 th:case="null">No postComments yet!</h2>
+            <h4 th:case="null">No postComments yet!</h4>
             <div th:case="*">
-                <div th:each="postComment : ${postComments}" class="post-container">
+                <div th:each="postComment : ${postComments}" class="post-container ">
                     <p th:text="${postComment.title}"></p><br>
                     <p th:text="${postComment.content}"></p>
-                    <p style="text-align: right;"><span th:text="${postComment.user.getFirstName()}"></span><span th:text="${postComment.user.getMiddleName()}"></span>
-                        <span th:text="${postComment.user.getLastName()}"></span></p>
+                    <p style="text-align: right;"><span th:text="${postComment.user.getFirstName()}"></span>
+                        <span th:text=" ${postComment.user.getMiddleName()}"></span>
+                        <span th:text=" ${postComment.user.getLastName()}"></span></p>
+                    <p th:onclick="'toggleReplyForm(\'' + ${postComment.id} + '\')'" style="color: deeppink;">Reply
+                        comment: </p><br>
+                    <form action="/replyPostComment" method="post" class="reply-form"
+                          th:id="'replyForm' + ${postComment.id}">
+                        <input type="hidden" name="postId" th:value="${post.id}">
+                        <input type="hidden" name="userId" th:value="${userId}">
+                        <input type="hidden" name="parentId" th:value="${postComment.id}">
+                        <input style="width: 70%;" type="text" placeholder="Title" name="yourTitle"><br>
+                        <input style="width: 70%;" type="text" placeholder="Comment của bạn" name="yourComment">
+                        <button type="submit">Reply Comment</button>
+                    </form>
+
+                    <p th:onclick="'xemReplyCmt(\'' + ${postComment.id} + '\')'" style="color: deeppink;">Xem reply
+                        comments: </p><br>
+                    <div th:switch="${postComment.getPostComments().size()}" th:id="'replyCmt' + ${postComment.id}"
+                         class="reply-cmt">
+                        <h4 th:case="0">No reply postComments yet!</h4>
+                        <div th:case="*">
+
+                            <div th:each="postComment1 : ${postComment.getAllDescendants()}" class="post-container2 ">
+                                    <p style="text-align: left;"><span
+                                            th:text="${postComment1.user.getFirstName()}"></span>
+                                        <span th:text=" ${postComment1.user.getMiddleName()}"></span>
+                                        <span th:text=" ${postComment1.user.getLastName()}"></span><span> | reply to>>></span><span
+                                                th:text="${postComment1.parent.user.getFirstName()}"></span>
+                                        <span th:text=" ${postComment1.parent.user.getMiddleName()}"></span>
+                                        <span th:text=" ${postComment1.parent.user.getLastName()}"></span></p>
+                                    <p th:text="${postComment1.title}"></p><br>
+                                    <p th:text="${postComment1.content}"></p>
+                                    <p th:onclick="'toggleReplyForm(\'' + ${postComment1.id} + '\')'"
+                                       style="color: deeppink;">Reply comment: </p><br>
+                                    <form action="/replyPostComment" method="post" class="reply-form"
+                                          th:id="'replyForm' + ${postComment1.id}">
+                                        <input type="hidden" name="postId" th:value="${post.id}">
+                                        <input type="hidden" name="userId" th:value="${userId}">
+                                        <input type="hidden" name="parentId" th:value="${postComment1.id}">
+                                        <input style="width: 70%;" type="text" placeholder="Title" name="yourTitle"><br>
+                                        <input style="width: 70%;" type="text" placeholder="Comment của bạn"
+                                               name="yourComment">
+                                        <button type="submit">Reply Comment</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
 
                 </div>
 
