@@ -16,7 +16,13 @@
 8. Thêm 1 bình luận độc lập
    ![image](https://github.com/BaoTruc0605/www_week6/assets/114350927/afa916c1-019f-4635-ad22-125e38f15ae0)
    ![image](https://github.com/BaoTruc0605/www_week6/assets/114350927/56ec7f2f-5443-47df-b4b6-8c9a09a256e1)
-
+9. Xem những reply bình luận
+   ![image](https://github.com/BaoTruc0605/www_week6/assets/114350927/9890c896-e4bc-4c9e-b7c3-b7c5a6c4c951)
+10. Trả lời bình luận
+    ![image](https://github.com/BaoTruc0605/www_week6/assets/114350927/a52c2025-2626-4a9e-b383-aae189baa11d)
+   ![image](https://github.com/BaoTruc0605/www_week6/assets/114350927/1ef17d36-2adc-4c41-b491-2d4f01963d16)
+11. Trả lời bình luận trong bình luận băng một user khác
+    ![image](https://github.com/BaoTruc0605/www_week6/assets/114350927/e2997087-064f-4a0f-909f-15100f59294e)
 
 
 
