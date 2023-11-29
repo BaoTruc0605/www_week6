@@ -13,6 +13,10 @@
    ![image](https://github.com/BaoTruc0605/www_week6/assets/114350927/458f79ae-bb8e-4cfc-99f4-7f3bcc055c97)
 7. Xem bản tin: các bài post đã được published và sắp xếp theo thứ tự từ gần đến xa theo trường publishedAt. Mỗi page có 5 bài post. Có thể nhấn vào "Xem chi tiết" để xem thêm thông tin và comment
    ![image](https://github.com/BaoTruc0605/www_week6/assets/114350927/a9d5e890-e15a-451b-80ff-54a74c585806)
+8. Thêm 1 bình luận độc lập
+   ![image](https://github.com/BaoTruc0605/www_week6/assets/114350927/afa916c1-019f-4635-ad22-125e38f15ae0)
+   ![image](https://github.com/BaoTruc0605/www_week6/assets/114350927/56ec7f2f-5443-47df-b4b6-8c9a09a256e1)
+
 
 
 
