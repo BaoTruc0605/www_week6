@@ -23,6 +23,9 @@
    ![image](https://github.com/BaoTruc0605/www_week6/assets/114350927/1ef17d36-2adc-4c41-b491-2d4f01963d16)
 11. Trả lời bình luận trong bình luận băng một user khác
     ![image](https://github.com/BaoTruc0605/www_week6/assets/114350927/e2997087-064f-4a0f-909f-15100f59294e)
+   ![image](https://github.com/BaoTruc0605/www_week6/assets/114350927/277507d9-cf3f-41a3-a2dc-677bec3d5461)
+12. Xem danh sách bình luận theo dạng: 1 bình luận cha, các bình luận con và con của những bình luận con cũng sẽ hiển thị
+    ![image](https://github.com/BaoTruc0605/www_week6/assets/114350927/45d6d923-7928-4bdf-a90f-788a333d2231)
 
 
 
